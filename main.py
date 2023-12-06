@@ -2,11 +2,21 @@ import copy
 
 
 def check_equal(line):
-    return all(element == line[0] for element in line)
+    count = 1
+    for i in range(len(line) - 1):
+        if line[i] == line[i + 1]:
+            count = count + 1
+        else:
+            count = 1
+        if count >= 3:
+            return True
+
+    return False
 
 
 def is_valid(board, i0, j0, i1, j1):
-    if not (0 <= i0 <= 2 and 0 <= j0 <= 2 and 0 <= i1 <= 2 and 0 <= j1 <= 2):
+    n = len(board)
+    if not (0 <= i0 <= n - 1 and 0 <= j0 <= n - 1 and 0 <= i1 <= n - 1 and 0 <= j1 <= n - 1):
         return False
 
     if not ((abs(i1 - i0) == 1 and abs(j1 - j0) == 0) or (abs(j1 - j0) == 1 and abs(i1 - i0) == 0)):
@@ -27,7 +37,7 @@ def is_valid(board, i0, j0, i1, j1):
 
     return False
 
-main_board = [[1, 2, 3], [4, 4, 5], [5, 3, 4]]
+main_board = [[2, 1, 2, 3], [5, 4, 4, 5], [2, 5, 3, 4], [6, 7, 6, 1]]
 
 while True:
     print("give the initial location (i0, j0)")
@@ -43,5 +53,3 @@ while True:
         print("It is valid")
     else:
         print("not valid")
-
-
